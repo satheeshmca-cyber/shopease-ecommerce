@@ -1,0 +1,345 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="description" content="ShopEase - Discover electronics, fashion, and accessories at great prices.">
+
+  <title>ShopEase | Online Shopping</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- ================= NAVIGATION ================= -->
+
+  <header class="navbar">
+    <a href="#home" class="logo">🛒 ShopEase</a>
+
+    <nav aria-label="Main navigation">
+      <a href="#home">Home</a>
+      <a href="#products">Shop</a>
+      <a href="#about">About</a>
+    </nav>
+
+    <div class="nav-actions">
+
+      <input
+        id="searchInput"
+        type="search"
+        placeholder="Search products..."
+        aria-label="Search products"
+      >
+
+      <button
+        id="wishlistButton"
+        class="wishlist-nav"
+        type="button"
+        aria-label="View wishlist"
+      >
+        ❤️ <span>Wishlist</span>
+        <span id="wishlistCount">0</span>
+      </button>
+
+      <button
+        id="cartButton"
+        class="cart-button"
+        type="button"
+        aria-label="Open shopping cart"
+      >
+        🛍️ Cart <span id="cartCount">0</span>
+      </button>
+
+    </div>
+  </header>
+
+
+  <main>
+
+    <!-- ================= HERO SECTION ================= -->
+
+    <section class="hero" id="home">
+
+      <div class="hero-content">
+        <p class="eyebrow">YOUR NEXT FAVORITE THING</p>
+
+        <h1>
+          Discover Amazing <span>Products</span>
+        </h1>
+
+        <p>
+          Explore the latest trends at prices you'll love.
+        </p>
+
+        <a href="#products" class="shop-button">
+          Shop Now →
+        </a>
+      </div>
+
+      <div class="hero-art" aria-hidden="true">🎧</div>
+
+    </section>
+
+
+    <!-- ================= PRODUCTS SECTION ================= -->
+
+    <section class="products-section" id="products">
+
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">HANDPICKED FOR YOU</p>
+          <h2 id="productsHeading">Featured Products</h2>
+        </div>
+
+        <select id="sortSelect" aria-label="Sort products">
+          <option value="default">Featured</option>
+          <option value="low">Price: Low to High</option>
+          <option value="high">Price: High to Low</option>
+          <option value="name">Name: A to Z</option>
+        </select>
+      </div>
+
+
+      <!-- CATEGORY FILTERS -->
+
+      <div class="filters" id="categoryFilters">
+
+        <button
+          class="filter active"
+          type="button"
+          data-category="All"
+        >
+          All
+        </button>
+
+        <button
+          class="filter"
+          type="button"
+          data-category="Electronics"
+        >
+          Electronics
+        </button>
+
+        <button
+          class="filter"
+          type="button"
+          data-category="Fashion"
+        >
+          Fashion
+        </button>
+
+        <button
+          class="filter"
+          type="button"
+          data-category="Accessories"
+        >
+          Accessories
+        </button>
+
+      </div>
+
+
+      <!-- WISHLIST TOOLBAR -->
+
+      <div class="wishlist-toolbar">
+        <button
+          id="showAllProducts"
+          class="filter active"
+          type="button"
+        >
+          All Products
+        </button>
+
+        <button
+          id="showWishlist"
+          class="filter"
+          type="button"
+        >
+          ❤️ My Wishlist
+        </button>
+      </div>
+
+
+      <!-- PRODUCT COUNT -->
+
+      <p
+        id="resultCount"
+        class="result-count"
+        aria-live="polite"
+      ></p>
+
+
+      <!-- JAVASCRIPT RENDERS PRODUCT CARDS HERE -->
+
+      <div
+        class="product-grid"
+        id="productGrid"
+        aria-live="polite"
+      ></div>
+
+    </section>
+
+
+    <!-- ================= ABOUT SECTION ================= -->
+
+    <section class="about" id="about">
+      <h2>Shopping made simple.</h2>
+
+      <p>
+        Discover quality products, explore your style,
+        and enjoy every find.
+      </p>
+    </section>
+
+  </main>
+
+
+  <!-- ================= PAGE OVERLAY ================= -->
+
+  <div class="overlay" id="overlay"></div>
+
+
+  <!-- ================= SHOPPING CART ================= -->
+
+  <aside
+    class="cart-panel"
+    id="cartPanel"
+    aria-label="Shopping cart"
+    aria-hidden="true"
+  >
+
+    <div class="cart-header">
+      <h2>
+        Your Cart (<span id="cartItemsCount">0</span>)
+      </h2>
+
+      <button
+        id="closeCart"
+        class="icon-button"
+        type="button"
+        aria-label="Close cart"
+      >
+        ✕
+      </button>
+    </div>
+
+
+    <!-- JAVASCRIPT RENDERS CART ITEMS HERE -->
+
+    <div class="cart-items" id="cartItems"></div>
+
+
+    <div class="cart-footer">
+
+      <div class="total-row">
+        <span>Subtotal</span>
+        <strong id="subtotal">₹0</strong>
+      </div>
+
+      <p class="shipping-note">
+        Shipping calculated at checkout.
+      </p>
+
+      <button
+        id="checkoutButton"
+        class="checkout-button"
+        type="button"
+      >
+        Proceed to Checkout →
+      </button>
+
+    </div>
+
+  </aside>
+
+
+  <!-- ================= PRODUCT DETAILS MODAL ================= -->
+
+  <div
+    class="product-modal"
+    id="productModal"
+    aria-hidden="true"
+  >
+
+    <div
+      class="modal-content"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modalName"
+    >
+
+      <button
+        id="closeModal"
+        class="modal-close"
+        type="button"
+        aria-label="Close product details"
+      >
+        ✕
+      </button>
+
+
+      <div class="modal-image">
+        <img id="modalImage" src="" alt="">
+      </div>
+
+
+      <div class="modal-details">
+
+        <p
+          id="modalCategory"
+          class="product-category"
+        ></p>
+
+        <h2 id="modalName"></h2>
+
+        <p id="modalPrice" class="price"></p>
+
+        <p id="modalDescription"></p>
+
+        <p class="modal-stock">
+          ✓ Available to add to cart
+        </p>
+
+        <button
+          id="modalAddButton"
+          class="checkout-button"
+          type="button"
+        >
+          Add to Cart
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ================= NOTIFICATION ================= -->
+
+  <div
+    class="toast"
+    id="toast"
+    role="status"
+    aria-live="polite"
+  ></div>
+
+
+  <!-- ================= FOOTER ================= -->
+
+  <footer>
+    <p>
+      © 2026 ShopEase. Built with HTML, CSS & JavaScript.
+    </p>
+  </footer>
+
+
+  <!-- JAVASCRIPT -->
+
+  <script src="script.js"></script>
+
+</body>
+</html>
